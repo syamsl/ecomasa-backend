@@ -30,7 +30,7 @@ exports.createCategoryOffer = async(req, res) => {
 
         res.json({ok:true});
     }catch (err) {
-        console.log(err)
+        res.status(400).send(err)
     }
 }
 
@@ -61,7 +61,7 @@ exports.createCategoryOffer = async(req, res) => {
             res.json(offer);
             
         }catch (err) {
-            console.log(err)
+            res.status(400).send(err)
         }
     }
 
@@ -69,7 +69,7 @@ exports.createCategoryOffer = async(req, res) => {
         try{
             res.json(await Product.find({}).exec())
         }catch(err){
-            console.log(err)
+            res.status(400).send(err)
         }
     }
 
@@ -83,7 +83,7 @@ exports.remove = async(req, res) => {
         res.json( await Product.updateMany({offer:req.params.offerId}, {$unset:{offerPrice:1, offer:1}}).exec());
 
     }catch (err) {
-        console.log(err)
+        res.status(400).send(err)
     }
 }
 
@@ -92,7 +92,7 @@ exports.list = async(req, res) => {
     try{
         res.json(await Offer.find({}).sort({createdAt: -1}).exec())
     }catch (err) {
-        console.log(err)
+        res.status(400).send(err)
     }
 }
 
@@ -104,6 +104,6 @@ exports.expiryCheck = async() =>{
 
         // console.log('deletedOffer --->', deletedOffer)
     }catch(err){
-        console.log("Err--->",err)
+        res.status(400).send(err)
     }
 }   

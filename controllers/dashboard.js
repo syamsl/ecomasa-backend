@@ -6,8 +6,8 @@ exports.userCount = async(req, res)=>{
    try{
         const data = await User.find({}).count().exec();
         res.json(data);
-   }catch(error){
-       console.log(error);
+   }catch(err){
+    res.status(400).send(err)
    }
 }
 
@@ -24,7 +24,7 @@ exports.productSold = async(req,res) =>{
         })
         res.json(total)
     }catch(err){
-        console.log(err)
+        res.status(400).send(err)
     }
 }
 
@@ -40,7 +40,7 @@ exports.orderCount = async(req,res) =>{
         ])
         res.json(data)
     }catch(err){
-        console.log(err)
+        res.status(400).send(err)
     }
 }
 
@@ -56,7 +56,7 @@ exports.totalRevenue = async(req,res) =>{
         ])
         res.json(data)
     }catch(err){
-        console.log(err)
+        res.status(400).send(err)
     }
 }
 
@@ -92,7 +92,7 @@ exports.weekOrders = async(req, res) =>{
                 res.json(dailySalesData)
   
     }catch(err){
-        console.log(err)
+        res.status(400).send(err)
     }
 }
 
@@ -111,6 +111,6 @@ exports.paymentMethod = async(req, res) =>{
             ])
             res.json(data)
     }catch(err){
-        console.log(err)
+        res.status(400).send(err)
     }
 }

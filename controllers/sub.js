@@ -8,8 +8,7 @@ exports.create = async (req, res) => {
     const sub = await new Sub({ name, parent, slug: slugify(name) }).save();
     res.json(sub);
   } catch (err) {
-    console.log("SUB CREATE ERROR==>",err);
-    res.status(400).send("Create sub failed");
+    res.status(400).send("Create sub failed", err);
   }
 };
 

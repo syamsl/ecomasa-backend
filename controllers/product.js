@@ -35,7 +35,6 @@ exports.remove = async (req, res) => {
     }).exec();
     res.json(deleted);
   } catch (err) {
-    console.log(err);
     return res.status(400).send("Product delete failed");
   }
 };
@@ -104,12 +103,15 @@ exports.list = async (req, res) => {
 
     res.json(products);
   } catch (err) {
-    console.log(err);
+    res.status(400).send(err);
   }
 };
 
 exports.productsCount = async (req, res) => {
-  let total = await Product.find({}).estimatedDocumentCount().populate("offer").exec();
+  let total = await Product.find({})
+    .estimatedDocumentCount()
+    .populate("offer")
+    .exec();
   res.json(total);
 };
 
@@ -204,7 +206,7 @@ const handleCategory = async (req, res, category) => {
 
     res.json(products);
   } catch (err) {
-    console.log(err);
+    res.status(400).send(err);
   }
 };
 
@@ -248,7 +250,6 @@ const handleSub = async (req, res, sub) => {
   res.json(products);
 };
 
-
 const handleShipping = async (req, res, shipping) => {
   const products = await Product.find({ shipping })
     .populate("category", "_id name")
@@ -278,7 +279,6 @@ const handleBrand = async (req, res, brand) => {
 
   res.json(products);
 };
-
 
 exports.searchFilters = async (req, res) => {
   const { query, price, category, stars, sub, shipping, color, brand } =

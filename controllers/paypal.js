@@ -44,6 +44,6 @@ try{
     payable: finalAmount,
   });
 }catch(err){
-    console.log("ERR AT PAYPAL--->",err)
+  res.status(400).send(err)
 }
 };
